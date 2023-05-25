@@ -9,7 +9,8 @@
 # 
 # All Rights Reserved
 # =============================================================== 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 17)
 project(KubeEngine)
 
 
@@ -17,10 +18,18 @@ project(KubeEngine)
 find_package(Vulkan REQUIRED)
 
 # Add the source files
-set(SOURCES main.cpp)
+set(SOURCES 
+    main.cpp
+)
 
 # Add the executable
 add_executable(KubeEngine ${SOURCES})
 
+# Директории для поиска заголовочных файлов
+target_include_directories(KubeEngine PRIVATE kube_engine)
+
 # Link the executable with the Vulkan library
 target_link_libraries(KubeEngine Vulkan::Vulkan)
+
+# Если xorg
+target_link_libraries(KubeEngine xcb)
