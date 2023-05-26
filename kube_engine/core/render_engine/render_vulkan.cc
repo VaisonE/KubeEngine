@@ -13,8 +13,14 @@
 #pragma once
 #include "kube_engine/core/platform.cc"
 
-void render() {
+void render_vulkan() {
     platform *os = get_platform();
-    os.create_window();
+    os->create_window();
+
+    while (true) {
+        
+    }
+
+    delete os;
 }
 
