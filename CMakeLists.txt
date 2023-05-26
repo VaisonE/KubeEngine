@@ -26,7 +26,7 @@ set(SOURCES
 add_executable(KubeEngine ${SOURCES})
 
 # Директории для поиска заголовочных файлов
-target_include_directories(KubeEngine PRIVATE kube_engine)
+target_include_directories(KubeEngine PRIVATE ../KubeEngine)
 
 # Link the executable with the Vulkan library
 target_link_libraries(KubeEngine Vulkan::Vulkan)
