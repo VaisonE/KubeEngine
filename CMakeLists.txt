@@ -13,23 +13,35 @@ cmake_minimum_required(VERSION 3.12)
 set(CMAKE_CXX_STANDARD 17)
 project(KubeEngine)
 
+# Set the variable PLATFORM to Windows or Linux
+set(PLATFORM Linux)
 
-# Find the Vulkan package
+# =============================================================== 
+# Find the Vulkan package and source path
 find_package(Vulkan REQUIRED)
-
-# Add the source files
 set(SOURCES 
-    main.cpp
+    kube_engine/api/kube_engine_core_api.cpp
 )
 
-# Add the executable
-add_executable(KubeEngine ${SOURCES})
+# Compilation, header search directories, compiler settings
+if(PLATFORM STREQUAL "Windows")
+    add_library(KubeEngine SHARED ${SOURCES})
+    target_include_directories(KubeEngine PRIVATE ../KubeEngine)
+    target_compile_definitions(KubeEngine PRIVATE -DKUBE_ENGINE_BUILD_DLL)
+    target_compile_options(KubeEngine PRIVATE /W4 /MP /EHsc)
+else()
+    add_library(KubeEngine SHARED ${SOURCES})
+    target_include_directories(KubeEngine PRIVATE ../KubeEngine)
+    target_compile_definitions(KubeEngine PRIVATE -DKUBE_ENGINE_BUILD_DLL)
+    target_compile_options(KubeEngine PRIVATE -Wall -fPIC -fexceptions)
+endif()
 
-# Директории для поиска заголовочных файлов
-target_include_directories(KubeEngine PRIVATE ../KubeEngine)
-
-# Link the executable with the Vulkan library
+# Linking with dependencies
 target_link_libraries(KubeEngine Vulkan::Vulkan)
-
-# Если xorg
-target_link_libraries(KubeEngine xcb)
+if(PLATFORM STREQUAL "Windows")
+    target_link_libraries(KubeEngine user32)
+    target_link_libraries(KubeEngine gdi32)
+else()
+    target_link_libraries(KubeEngine xcb)
+    target_link_libraries(KubeEngine dl)
+endif()
