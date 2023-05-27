@@ -20,7 +20,7 @@ enum PLATFORM {
 };
 
 #ifdef __linux__
-    #include <vulkan/vulkan.h>
+    #pragma once
 
     // Using the 'Wayland'
     #include <wayland-client.h>
@@ -31,7 +31,7 @@ enum PLATFORM {
 #endif
 
 #ifdef _WIN64
-    #include <vulkan/vulkan.h>
+    #pragma once
     #include <GLFW/glfw3.h>
     #include <Windows.h>
 

@@ -11,16 +11,13 @@
 // =============================================================== 
 
 #pragma once
-#include "kube_engine/core/platform.cc"
+#include "kube_engine/api/include/core.hpp"
 
-void render_vulkan() {
-    platform *os = get_platform();
-    os->create_window();
+#include "kube_engine/core/render_engine/Render.cc"
 
-    while (true) {
-        
+
+namespace ke {
+    void start() {
+        render();
     }
-
-    delete os;
 }
-
