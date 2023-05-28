@@ -12,13 +12,14 @@
 
 #pragma once 
 #include "kube_engine/core/platform.cc"
-#include "kube_engine/core/render_engine/VulkanRender.cc"
+#include "kube_engine/core/render_engine/low_level_render/VulkanRender.cc"
 
 void render() {
     platform *os = get_platform();
     os->create_window();
 
-    VulkanRender();
+    VulkanRender render;
+    render.runRender();
     while (true) {
         
     }

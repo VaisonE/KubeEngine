@@ -10,16 +10,15 @@
 // All Rights Reserved
 // =============================================================== 
 
-#pragma once
-#include <vulkan/vulkan.h>
-#include <iostream>
+/*
+* 
+*/
 
-class VulkanRender {
-    public:
-        VulkanRender() {
-            
-        }
-
+class RenderEngineInterface {
     private:
-        VkInstance instance;
+        
+    protected:
+        
+        
+    public:
 };
