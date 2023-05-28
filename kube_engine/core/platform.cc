@@ -1,4 +1,4 @@
-// =============================================================== 
+// ==================================================================
 // KubeEngine is an open source game engine.
 // Copyright (C) 2023 The KubeEngine authors
 //
@@ -8,7 +8,9 @@
 // https://github.com/VaisonE/KubeEngine/blob/main/license
 // 
 // All Rights Reserved
-// =============================================================== 
+// ==================================================================
+// platform.cc                                                          
+// ==================================================================
 
 enum PLATFORM {
     LINUX,
@@ -19,8 +21,11 @@ enum PLATFORM {
     IOS
 };
 
+#pragma once
+#include <string>
+
 #ifdef __linux__
-    #pragma once
+    #include <GLFW/glfw3.h>
 
     // Using the 'Wayland'
     #include <wayland-client.h>
@@ -31,7 +36,6 @@ enum PLATFORM {
 #endif
 
 #ifdef _WIN64
-    #pragma once
     #include <GLFW/glfw3.h>
     #include <Windows.h>
 
@@ -59,6 +63,27 @@ class platform {
 
 
 /* descendants of the 'platform' class */
+
+class Linux : public platform {
+    public:
+        void create_window() override {
+            glfwInit();
+            glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+            glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+            window = glfwCreateWindow
+            (WIDTH, HEIGHT, "Game", nullptr, nullptr);
+        }
+        
+        PLATFORM get_platform_type() override {
+            return PLATFORM::LINUX;
+        }
+
+    private:
+        GLFWwindow* window;
+        const uint32_t WIDTH = 800;
+        const uint32_t HEIGHT = 600;
+};
 
 class linux_wayland : public platform {
     public:
@@ -118,7 +143,7 @@ class linux_xorg : public platform {
         }
 };
 
-class windows : public platform {
+class Windows : public platform {
     public:
         void create_window() override {
 
@@ -141,6 +166,6 @@ platform* get_platform() {
         return new linux_xorg;
     }
     if(build_platform == PLATFORM::WINDOWS) {
-        return new windows;
+        return new Windows;
     }
 }
