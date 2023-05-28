@@ -6,4 +6,4 @@ API - a directory that stores API code source files for interacting with the Kub
 
 Core - directory containing the main source code files of the engine core
 
-GUI - directory, with development environment source code files
+Editor - directory, with development environment source code files
