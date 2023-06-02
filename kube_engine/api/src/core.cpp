@@ -11,13 +11,20 @@
 // =============================================================== 
 
 #pragma once
-#include "kube_engine/api/include/core.hpp"
-
-#include "kube_engine/core/render_engine/Render.cc"
-
+#include "kube_engine/api/include/core.hpp" // header
+#include "kube_engine/core/render_engine/renderInterface.cc"
+#include "kube_engine/core/render_engine/lowLevelRendering/vulkan/vulkan.cc"
 
 namespace ke {
-    void start() {
-        render();
+    void start(
+        ke::renderAPI render_type,
+        std::string ProjectName, 
+        const uint32_t WIDTH, 
+        const uint32_t HEIGHT
+    ) {
+        if (render_type == renderInterface::renderAPI::VULKAN) {
+            renderInterface r(renderInterface::renderAPI::VULKAN, ProjectName, WIDTH, HEIGHT);
+            r.runRender();
+        }
     }
 }

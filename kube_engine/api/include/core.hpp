@@ -10,12 +10,25 @@
 // All Rights Reserved
 // =============================================================== 
 
+#pragma once
+#include <string>
+
 #ifdef __cplusplus
 extern "C++" {
 #endif
 
 namespace ke {
-    void start();
+    enum renderAPI {
+        VULKAN,
+        DIRECT3D
+    };
+
+    void start(
+        renderAPI render_type,
+        std::string ProjectName, 
+        const uint32_t WIDTH, 
+        const uint32_t HEIGHT
+    );
 }
 
 #ifdef __cplusplus
