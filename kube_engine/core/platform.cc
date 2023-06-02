@@ -43,17 +43,17 @@ enum PLATFORM {
 #endif
 
 
-/* 
-* The 'platform' abstract class and its descendants contain the key components 
-* for working with a specific platform on which the KubeEngine game engine was run. 
-* Serves to implement polymorphism in code.
-*
-* It has two virtual methods 'create_window' and 'get_platform_type'.
-*  
-* 'create_window' - contains platform-specific code for creating a new window
-* 'get_platform_type' - returns the 'PLATFORM' enumerated type pointing 
-*   to the type of the object of the 'platform' class descendant
- */
+/* =================================================================================== */
+/* The 'platform' abstract class and its descendants contain the key components        */
+/* for working with a specific platform on which the KubeEngine game engine was run.   */
+/* Serves to implement polymorphism in code.                                           */
+/*                                                                                     */
+/* It has two virtual methods 'create_window' and 'get_platform_type'.                 */
+/*                                                                                     */
+/* 'create_window' - contains platform-specific code for creating a new window         */
+/* 'get_platform_type' - returns the 'PLATFORM' enumerated type pointing               */
+/*   to the type of the object of the 'platform' class descendant                      */
+/* =================================================================================== */
 
 class platform {
     public:
@@ -155,15 +155,15 @@ class Windows : public platform {
 };
 
 
-/* 
-* Depending on the type of platform in the build_platform variable, 
-*   returns a class to work with a platform of the same type 
-*   along with the 'new' operator
-*/
+/* ================================================================== */
+/* Depending on the type of platform in the build_platform variable,  */
+/*  returns a class to work with a platform of the same type          */
+/*   along with the 'new' operator                                    */                  
+/* ================================================================== */
 
 platform* get_platform() {
     if(build_platform == PLATFORM::LINUX) {
-        return new linux_xorg;
+        return new Linux;
     }
     if(build_platform == PLATFORM::WINDOWS) {
         return new Windows;

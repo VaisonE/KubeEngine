@@ -9,18 +9,15 @@
 //                                                                    //
 // All Rights Reserved                                                //
 // ================================================================== //
-// RenderEngineInterface.cc                                           //    
+// QueueFamilies.cc                                                   //    
 // ================================================================== //
 
-/*
-* 
-*/
+#pragma once
+#include "kube_engine/core/render_engine/lowLevelRendering/vulkan/vulkan.h"
 
-class RenderEngineInterface {
-    private:
-        
-    protected:
-        
-        
-    public:
-};
+QueueFamilyIndices vulkanRender::findQueueFamilies(VkPhysicalDevice device) {
+    QueueFamilyIndices indices;
+    // Logic to find queue family indices to populate struct with
+    return indices;
+}
+

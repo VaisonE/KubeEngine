@@ -9,22 +9,23 @@
 //                                                                    //
 // All Rights Reserved                                                //
 // ================================================================== //
-// Render.cc                                                          //    
+// vulkan_expansions.h                                                //    
 // ================================================================== //
 
 #pragma once
-#include <iostream>
-#include <stdexcept>
-#include <cstdlib>
-#include <string>
-#include <vector>
+#include "kube_engine/core/render_engine/lowLevelRendering/vulkan/vulkan.h"
 
-class Render {
-    public:
-        virtual void setRenderSettings(
-            std::string ProjectName, 
-            const uint32_t WIDTH, 
-            const uint32_t HEIGHT
-        ) = 0;
-        virtual void render() = 0;
-};
+void vulkanRender::VulkanExpansions::get_extensions_vulkan() {
+    uint32_t extensionCount = 0;
+    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+    std::vector<VkExtensionProperties> extensions(extensionCount);
+
+    vkEnumerateInstanceExtensionProperties(nullptr, 
+        &extensionCount, 
+        extensions.data());
+
+    std::cout << "available extensions:\n";
+    for (const auto& extension : extensions) {
+        std::cout << '\t' << extension.extensionName << '\n';
+    }
+}

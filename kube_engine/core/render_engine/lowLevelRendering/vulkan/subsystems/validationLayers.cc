@@ -9,22 +9,5 @@
 //                                                                    //
 // All Rights Reserved                                                //
 // ================================================================== //
-// Render.cc                                                          //    
+// validationLayers.h                                                 //    
 // ================================================================== //
-
-#pragma once
-#include <iostream>
-#include <stdexcept>
-#include <cstdlib>
-#include <string>
-#include <vector>
-
-class Render {
-    public:
-        virtual void setRenderSettings(
-            std::string ProjectName, 
-            const uint32_t WIDTH, 
-            const uint32_t HEIGHT
-        ) = 0;
-        virtual void render() = 0;
-};

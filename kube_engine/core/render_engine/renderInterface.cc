@@ -9,22 +9,47 @@
 //                                                                    //
 // All Rights Reserved                                                //
 // ================================================================== //
-// Render.cc                                                          //    
+// renderInterface.cc                                                 //    
 // ================================================================== //
 
 #pragma once
-#include <iostream>
-#include <stdexcept>
-#include <cstdlib>
-#include <string>
-#include <vector>
+#include "kube_engine/core/render_engine/lowLevelRendering/vulkan/vulkan.h"
 
-class Render {
+class renderInterface {
     public:
-        virtual void setRenderSettings(
+        enum renderAPI {
+            VULKAN,
+            DIRECT3D
+        };
+
+        renderInterface (
+            renderAPI render_type,
             std::string ProjectName, 
             const uint32_t WIDTH, 
             const uint32_t HEIGHT
-        ) = 0;
-        virtual void render() = 0;
+        ) {
+            this->render_type = render_type;
+            this->ProjectName = ProjectName;
+            this->HEIGHT = HEIGHT;
+            this->WIDTH = WIDTH;
+
+            if (render_type == renderAPI::VULKAN) 
+                render = new vulkanRender;
+        }
+        ~renderInterface() {
+            delete render;
+        }
+
+        void runRender() {
+            render->setRenderSettings(ProjectName, WIDTH, HEIGHT);
+            render->render();
+        }
+    
+    private:
+        Render* render;
+
+        renderAPI render_type;
+        std::string ProjectName; 
+        uint32_t HEIGHT;
+        uint32_t WIDTH;
 };
