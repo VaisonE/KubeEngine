@@ -1,4 +1,7 @@
 
+# IDE
+.vscode
+
 # the build directories
 build 
 test
